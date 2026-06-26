@@ -3,7 +3,9 @@
 	"version": "v2.1.1",
 	"gd": {
 		"win": "2.2081",
-		"mac": "2.2081"
+		"mac": "2.2081",
+		"android": "2.2081",
+		"ios": "2.2081"
 	},
 	"id": "toastexgd.toastyreplay",
 	"name": "ToastyReplay",
@@ -15,7 +17,8 @@
 	"dependencies": {
 		"eclipse.ffmpeg-api": {
 			"version": ">=v2.0.0",
-			"required": false
+			"required": false,
+			"platforms": ["win", "mac"]
 		}
 	},
 	"incompatibilities": {
@@ -30,7 +33,16 @@
 			"description": "Which in-game menu to use. <cy>ImGui</c> is the classic overlay; <cj>Cocos2d</c> is the native Geometry Dash UI. Open with your menu key (or the floating button on mobile). Takes effect the next time you open the menu.",
 			"type": "string",
 			"default": "ImGui",
-			"one-of": ["ImGui", "Cocos2d"]
+			"one-of": ["ImGui", "Cocos2d"],
+			"platforms": ["win", "mac"]
+		},
+		"menu_frontend_mobile": {
+			"name": "Menu Style",
+			"description": "Which in-game menu to use. <cj>Cocos2d</c> is the native Geometry Dash UI (recommended for mobile). Open with the floating button.",
+			"type": "string",
+			"default": "Cocos2d",
+			"one-of": ["ImGui", "Cocos2d"],
+			"platforms": ["android", "ios"]
 		},
 		"ui_language": {
 			"name": "UI Language",
@@ -45,15 +57,34 @@
 				"Zhongwen"
 			]
 		},
+		"mobile_fab_position": {
+			"name": "Button Position",
+			"description": "Where the floating action button appears on screen.",
+			"type": "string",
+			"default": "Bottom Right",
+			"one-of": ["Bottom Right", "Bottom Left", "Top Right", "Top Left"],
+			"platforms": ["android", "ios"]
+		},
+		"mobile_fab_opacity": {
+			"name": "Button Opacity",
+			"description": "Opacity of the floating action button (0.2 - 1.0).",
+			"type": "float",
+			"default": 0.85,
+			"min": 0.2,
+			"max": 1.0,
+			"platforms": ["android", "ios"]
+		},
 		"ffmpeg_path": {
 			"name": "ffmpeg.exe Path",
 			"type": "file",
-			"default": ""
+			"default": "",
+			"platforms": ["win"]
 		},
 		"render_folder": {
 			"name": "Render Save Location",
 			"type": "folder",
-			"default": ""
+			"default": "",
+			"platforms": ["win", "mac"]
 		}
 	},
 	"resources": {
