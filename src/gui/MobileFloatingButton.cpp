@@ -106,22 +106,7 @@ void MobileFloatingButton::ccTouchCancelled(CCTouch* touch, CCEvent* event) {
 }
 
 void MobileFloatingButton::onTouch(CCObject*) {
-    auto* ui = MenuInterface::get();
-    if (!ui) return;
-
-    if (toasty::frontend::isCocos()) {
-        toasty::frontend::show();
-        return;
-    }
-
-    if (ui->shown) {
-        ui->anim.closing = true;
-        ui->anim.opening = false;
-    } else {
-        ui->shown        = true;
-        ui->anim.opening = true;
-        ui->anim.closing = false;
-    }
+    toasty::frontend::toggleMenu();
 }
 
 void MobileFloatingButton::reposition() {
