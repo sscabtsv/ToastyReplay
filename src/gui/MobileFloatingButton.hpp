@@ -1,12 +1,13 @@
 #pragma once
 
 #include <Geode/Geode.hpp>
+#include <Geode/modify/PlayLayer.hpp>
 
 using namespace geode::prelude;
 
 #ifdef GEODE_IS_MOBILE
 
-class MobileFloatingButton : public CCNode {
+class MobileFloatingButton : public CCNode, public CCTouchDelegate {
 public:
     static MobileFloatingButton* create();
     static MobileFloatingButton* get();
@@ -15,15 +16,19 @@ public:
     void onTouch(CCObject* sender);
     void reposition();
 
-private:
-    CCSprite* m_sprite = nullptr;
-    CCMenuItemSpriteExtra* m_item = nullptr;
-    CCMenu* m_menu = nullptr;
-    bool m_dragging = false;
-    CCPoint m_dragStart{};
-    CCPoint m_nodeStart{};
+    bool ccTouchBegan(CCTouch* touch, CCEvent* event) override;
+    void ccTouchMoved(CCTouch* touch, CCEvent* event) override;
+    void ccTouchEnded(CCTouch* touch, CCEvent* event) override;
+    void ccTouchCancelled(CCTouch* touch, CCEvent* event) override;
 
-    void applyOpacity();
+    void onExit() override;
+
+private:
+    CCMenuItemSpriteExtra* m_item    = nullptr;
+    CCMenu*                m_menu    = nullptr;
+    bool                   m_dragging = false;
+    CCPoint                m_dragStart{};
+    CCPoint                m_nodeStart{};
 };
 
 class $modify(MobileFABPlayLayer, PlayLayer) {
