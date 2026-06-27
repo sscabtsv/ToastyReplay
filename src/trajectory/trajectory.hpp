@@ -52,27 +52,15 @@ struct TrajectoryFormState {
 };
 
 struct TrajectoryInteractionState {
-    bool padRingRelated = false;
-    bool ringJumpRelated = false;
+    bool padRingRelated;
+    bool ringJumpRelated;
     gd::unordered_set<int> ringRelatedSet;
-    bool touchedRing = false;
-    bool touchedCustomRing = false;
-    bool touchedPad = false;
-    GameObject* lastActivatedPortal = nullptr;
-    CCPoint lastPortalPos = CCPointZero;
-    bool playEffects = false;
-
-    TrajectoryInteractionState()
-        : padRingRelated(false)
-        , ringJumpRelated(false)
-        , ringRelatedSet()
-        , touchedRing(false)
-        , touchedCustomRing(false)
-        , touchedPad(false)
-        , lastActivatedPortal(nullptr)
-        , lastPortalPos(CCPointZero)
-        , playEffects(false)
-    {}
+    bool touchedRing;
+    bool touchedCustomRing;
+    bool touchedPad;
+    GameObject* lastActivatedPortal;
+    CCPoint lastPortalPos;
+    bool playEffects;
 };
 
 struct TrajectorySlopeState {
@@ -225,6 +213,16 @@ struct PlayerStateCapsule {
     TrajectoryCollisionState collision;
     TrajectoryDynamicsState dynamics;
     TrajectoryInputState input;
+
+    PlayerStateCapsule()
+        : motion()
+        , form()
+        , interaction()
+        , slope()
+        , collision()
+        , dynamics()
+        , input()
+    {}
 };
 
 struct PredictionWatchKey {
