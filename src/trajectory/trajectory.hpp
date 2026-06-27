@@ -52,15 +52,27 @@ struct TrajectoryFormState {
 };
 
 struct TrajectoryInteractionState {
-    bool padRingRelated;
-    bool ringJumpRelated;
+    bool padRingRelated = false;
+    bool ringJumpRelated = false;
     gd::unordered_set<int> ringRelatedSet;
-    bool touchedRing;
-    bool touchedCustomRing;
-    bool touchedPad;
-    GameObject* lastActivatedPortal;
-    CCPoint lastPortalPos;
-    bool playEffects;
+    bool touchedRing = false;
+    bool touchedCustomRing = false;
+    bool touchedPad = false;
+    GameObject* lastActivatedPortal = nullptr;
+    CCPoint lastPortalPos = CCPointZero;
+    bool playEffects = false;
+
+    TrajectoryInteractionState()
+        : padRingRelated(false)
+        , ringJumpRelated(false)
+        , ringRelatedSet()
+        , touchedRing(false)
+        , touchedCustomRing(false)
+        , touchedPad(false)
+        , lastActivatedPortal(nullptr)
+        , lastPortalPos(CCPointZero)
+        , playEffects(false)
+    {}
 };
 
 struct TrajectorySlopeState {
